@@ -63,6 +63,7 @@ const Hero = () => {
             >
               <Button
                 size="lg"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                 className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/50 transition-all duration-300"
               >
                 Demander une démo
@@ -71,6 +72,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                 className="border-primary/30 hover:border-primary hover:bg-primary/10"
               >
                 Commencez maintenant
