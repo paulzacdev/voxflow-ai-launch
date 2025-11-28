@@ -4,6 +4,8 @@ import Solutions from "@/components/Solutions";
 import HowItWorks from "@/components/HowItWorks";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
+import Pricing from "@/components/Pricing";
+import ContactForm from "@/components/ContactForm";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
@@ -17,6 +19,8 @@ const Index = () => {
       <HowItWorks />
       <WhyUs />
       <Testimonials />
+      <Pricing />
+      <ContactForm />
       <CTASection />
       <Footer />
       <ChatBot />

@@ -81,6 +81,7 @@ const CTASection = () => {
               >
                 <Button
                   size="lg"
+                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                   className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/50 transition-all duration-300 text-lg px-8 py-6"
                 >
                   Demander une démo
@@ -89,6 +90,7 @@ const CTASection = () => {
                 <Button
                   size="lg"
                   variant="outline"
+                  onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
                   className="border-primary/30 hover:border-primary hover:bg-primary/10 text-lg px-8 py-6"
                 >
                   Voir la tarification
