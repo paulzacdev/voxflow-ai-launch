@@ -8,7 +8,7 @@ const Header = () => {
           <img 
             src={logoVoxflow} 
             alt="VoxFlow AI Logo" 
-            className="h-16 w-48"
+            className="h-14 w-auto object-contain"
           />
         </div>
       </div>
