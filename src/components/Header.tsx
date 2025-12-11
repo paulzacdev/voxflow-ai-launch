@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import logoVoxflow from "@/assets/logo-voxflow.png";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,7 +22,7 @@ const Header = () => {
     >
       <div className="h-full flex items-center px-4 md:px-6">
         <img 
-          src={logoVoxflow} 
+          src="/assets/logo-voxflow.png" 
           alt="VoxFlow AI Logo" 
           className="h-12 md:h-[60px] w-auto max-w-[250px] object-contain"
         />
