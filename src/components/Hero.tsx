@@ -111,7 +111,7 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 rounded-2xl blur-3xl" />
               <img
-                src="/assets/hero-ai.jpg"
+                src="/images/hero-ai.jpg"
                 alt="VoxFlow.ai - Interface IA futuriste"
                 className="relative rounded-2xl shadow-2xl"
               />

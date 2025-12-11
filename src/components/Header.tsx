@@ -22,7 +22,7 @@ const Header = () => {
     >
       <div className="h-full flex items-center px-4 md:px-6">
         <img 
-          src="/assets/logo-voxflow.png" 
+          src="/images/logo-voxflow.png" 
           alt="VoxFlow AI Logo" 
           className="h-12 md:h-[60px] w-auto max-w-[250px] object-contain"
         />
