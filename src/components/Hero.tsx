@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import heroImage from "@/assets/hero-ai.jpg";
 
 const Hero = () => {
   return (
@@ -112,7 +111,7 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-accent/30 rounded-2xl blur-3xl" />
               <img
-                src={heroImage}
+                src="/assets/hero-ai.jpg"
                 alt="VoxFlow.ai - Interface IA futuriste"
                 className="relative rounded-2xl shadow-2xl"
               />
