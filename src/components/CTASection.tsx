@@ -82,18 +82,10 @@ const CTASection = () => {
                 <Button
                   size="lg"
                   onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/50 transition-all duration-300 text-lg px-8 py-6"
+                  className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/50 transition-all duration-300 text-lg px-10 py-7"
                 >
-                  Demander une démo
+                  Demander une démo gratuite
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-                  className="border-primary/30 hover:border-primary hover:bg-primary/10 text-lg px-8 py-6"
-                >
-                  Voir la tarification
                 </Button>
               </motion.div>
 

@@ -4,26 +4,26 @@ import { MessageSquare, Mic, Mail, MessageCircle } from "lucide-react";
 const solutions = [
   {
     icon: MessageSquare,
-    title: "Chatbots IA pour sites web",
-    description: "Intégrez des agents conversationnels intelligents qui comprennent et répondent naturellement aux questions de vos visiteurs.",
+    title: "Agents IA textuels",
+    description: "Réponses instantanées sur votre site web. Vos visiteurs obtiennent des réponses précises en moins de 3 secondes, 24h/24.",
     gradient: "from-blue-500 to-indigo-600",
   },
   {
     icon: Mic,
-    title: "Voix IA pour support client",
-    description: "Assistants vocaux capables de gérer des conversations téléphoniques complexes avec une qualité humaine.",
+    title: "Agents IA vocaux",
+    description: "Appels téléphoniques gérés automatiquement. L'IA répond, qualifie et transfère uniquement les appels importants.",
     gradient: "from-indigo-600 to-purple-600",
   },
   {
     icon: Mail,
-    title: "Automatisation des emails",
-    description: "Réponses automatiques intelligentes et personnalisées à tous vos emails clients avec analyse de sentiment.",
+    title: "Automatisation emails",
+    description: "Chaque email reçoit une réponse personnalisée en quelques secondes. Plus de retards, plus de clients frustrés.",
     gradient: "from-purple-600 to-pink-600",
   },
   {
     icon: MessageCircle,
-    title: "Messagerie omnicanal",
-    description: "Automatisez WhatsApp, Instagram Messenger et Facebook Messenger depuis une seule plateforme unifiée.",
+    title: "WhatsApp & Instagram",
+    description: "Gérez des centaines de conversations simultanées sur WhatsApp et Instagram sans effort supplémentaire.",
     gradient: "from-cyan-500 to-blue-500",
   },
 ];
@@ -42,10 +42,10 @@ const Solutions = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Nos <span className="text-gradient">Solutions</span>
+            La solution <span className="text-gradient">VoxFlow AI</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Des technologies d'IA avancées pour automatiser et améliorer chaque point de contact avec vos clients
+            Des agents IA qui répondent instantanément à vos clients, sur tous les canaux, sans interruption
           </p>
         </motion.div>
 
