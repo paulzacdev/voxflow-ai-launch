@@ -39,19 +39,27 @@ const Hero = () => {
               transition={{ delay: 0.3 }}
               className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
             >
-              Transformez votre{" "}
+              Réduisez vos coûts de{" "}
               <span className="text-gradient">support client</span>{" "}
-              avec l'IA
+              de 60%
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-xl text-muted-foreground mb-8 leading-relaxed"
+              className="text-xl text-muted-foreground mb-4 leading-relaxed"
             >
-              VoxFlow.ai automatise vos réponses sur le web, email, WhatsApp et Instagram, 
-              avec des chatbots intelligents et une voix IA naturelle.
+              VoxFlow AI déploie des agents IA vocaux et textuels qui répondent instantanément à vos clients, 24h/24, sur tous vos canaux.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              className="text-lg text-foreground/80 mb-8 font-medium"
+            >
+              Automatisez vos appels, emails et messages — gagnez du temps et ne perdez plus aucun lead.
             </motion.p>
 
             <motion.div
@@ -63,18 +71,10 @@ const Hero = () => {
               <Button
                 size="lg"
                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/50 transition-all duration-300"
+                className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/50 transition-all duration-300 text-lg px-8 py-6"
               >
-                Demander une démo
+                Demander une démo gratuite
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="border-primary/30 hover:border-primary hover:bg-primary/10"
-              >
-                Commencez maintenant
               </Button>
             </motion.div>
 
