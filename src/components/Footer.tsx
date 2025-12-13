@@ -105,22 +105,11 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-center items-center gap-4"
         >
           <p className="text-sm text-muted-foreground">
             © {currentYear} VoxFlow.ai. Tous droits réservés.
           </p>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>Fait avec</span>
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
-              className="text-accent"
-            >
-              ❤️
-            </motion.span>
-            <span>en France</span>
-          </div>
         </motion.div>
       </div>
 
