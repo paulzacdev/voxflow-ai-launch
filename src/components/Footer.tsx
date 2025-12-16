@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Twitter, Github } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,10 +10,8 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Github, href: "#", label: "Github" },
-    { icon: Mail, href: "#", label: "Email" },
+    { icon: MessageCircle, href: `https://wa.me/${contactInfo.whatsapp.replace(/\+/g, '')}`, label: "WhatsApp" },
+    { icon: Mail, href: `mailto:${contactInfo.email}`, label: "Email" },
   ];
 
   return (
