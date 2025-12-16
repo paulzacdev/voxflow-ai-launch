@@ -4,31 +4,9 @@ import { Mail, Linkedin, Twitter, Github } from "lucide-react";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = {
-    Solutions: [
-      { label: "Chatbots IA", href: "#" },
-      { label: "Voix IA", href: "#" },
-      { label: "Email automation", href: "#" },
-      { label: "Messagerie omnicanal", href: "#" },
-    ],
-    Entreprise: [
-      { label: "À propos", href: "#" },
-      { label: "Tarifs", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Carrières", href: "#" },
-    ],
-    Ressources: [
-      { label: "Documentation", href: "#" },
-      { label: "API", href: "#" },
-      { label: "Support", href: "#" },
-      { label: "Status", href: "#" },
-    ],
-    Légal: [
-      { label: "Confidentialité", href: "#" },
-      { label: "CGU", href: "#" },
-      { label: "Mentions légales", href: "#" },
-      { label: "Cookies", href: "#" },
-    ],
+  const contactInfo = {
+    whatsapp: "+21376891935",
+    email: "flowaivox@gmail.com",
   };
 
   const socialLinks = [
@@ -41,14 +19,13 @@ const Footer = () => {
   return (
     <footer className="relative border-t border-border/50 bg-background/95 backdrop-blur">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Logo and description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="col-span-2"
           >
             <div className="mb-4">
               <h3 className="text-2xl font-bold text-gradient">VoxFlow.ai</h3>
@@ -73,30 +50,62 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Footer links */}
-          {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-            >
-              <h4 className="font-semibold mb-4 text-foreground">{category}</h4>
-              <ul className="space-y-2">
-                {links.map((link, index) => (
-                  <li key={index}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {/* Contact */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h4 className="font-semibold mb-4 text-foreground">Contact</h4>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href={`https://wa.me/${contactInfo.whatsapp.replace(/\+/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  <span className="text-primary">WhatsApp:</span> {contactInfo.whatsapp}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  <span className="text-primary">Email:</span> {contactInfo.email}
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Légal */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h4 className="font-semibold mb-4 text-foreground">Légal</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="/politique-confidentialite" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Politique de confidentialité
+                </a>
+              </li>
+              <li>
+                <a href="/conditions-utilisation" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Conditions d'utilisation
+                </a>
+              </li>
+              <li>
+                <a href="/mentions-legales" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Mentions légales
+                </a>
+              </li>
+            </ul>
+          </motion.div>
         </div>
 
         {/* Bottom bar */}
