@@ -54,9 +54,9 @@ const ChatBot = () => {
     }, 1000);
   };
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isTyping) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -65,31 +65,96 @@ const ChatBot = () => {
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    const history = [...messages, userMessage].map((m) => ({
+      role: m.sender === "user" ? "user" : "assistant",
+      content: m.text,
+    }));
+
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
+    setIsTyping(true);
 
-    setTimeout(() => {
-      let botResponse = "";
-      const lowerInput = inputValue.toLowerCase();
+    try {
+      const resp = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ messages: history }),
+        },
+      );
 
-      if (lowerInput.includes("prix") || lowerInput.includes("tarif") || lowerInput.includes("coût")) {
-        botResponse = "Nos solutions sont personnalisables selon vos besoins. Je vous invite à demander une démo pour obtenir un devis sur mesure. Souhaitez-vous que je vous mette en contact avec notre équipe ?";
-      } else if (lowerInput.includes("démo") || lowerInput.includes("demo") || lowerInput.includes("essai")) {
-        botResponse = "Excellent ! Vous pouvez demander une démo gratuite en cliquant sur le bouton 'Demander une démo' en haut de la page. Notre équipe vous contactera sous 24h pour planifier une présentation personnalisée.";
-      } else if (lowerInput.includes("chatbot") || lowerInput.includes("ia") || lowerInput.includes("automatisation")) {
-        botResponse = "VoxFlow.ai propose des solutions d'automatisation complètes : chatbots IA, voix IA, automatisation des emails et messages sur WhatsApp, Instagram et Messenger. Quelle solution vous intéresse particulièrement ?";
-      } else if (lowerInput.includes("whatsapp") || lowerInput.includes("instagram") || lowerInput.includes("messenger")) {
-        botResponse = "Nous automatisons vos communications sur tous vos canaux : WhatsApp, Instagram Messenger et Facebook Messenger. L'IA répond instantanément 24/7 à vos clients avec un ton naturel et personnalisé.";
-      } else if (lowerInput.includes("merci") || lowerInput.includes("thank")) {
-        botResponse = "Je vous en prie ! N'hésitez pas si vous avez d'autres questions. Je suis là pour vous aider ! 😊";
-      } else if (lowerInput.includes("appel") || lowerInput.includes("téléphone") || lowerInput.includes("voix")) {
-        botResponse = "Vous pouvez passer un appel vocal avec notre agent IA en cliquant sur le bouton téléphone ci-dessus ! L'agent répondra instantanément à toutes vos questions.";
-      } else {
-        botResponse = "Merci pour votre message ! Pour une réponse détaillée, je vous invite à demander une démo ou à nous contacter directement. Notre équipe d'experts sera ravie de répondre à toutes vos questions.";
+      if (!resp.ok || !resp.body) {
+        if (resp.status === 429) {
+          toast({ title: "Trop de requêtes", description: "Réessayez dans un instant.", variant: "destructive" });
+        } else if (resp.status === 402) {
+          toast({ title: "Crédits IA épuisés", description: "Ajoutez des crédits Lovable AI.", variant: "destructive" });
+        } else {
+          toast({ title: "Erreur", description: "Impossible de contacter l'assistant.", variant: "destructive" });
+        }
+        setIsTyping(false);
+        return;
       }
 
-      addBotMessage(botResponse);
-    }, 800);
+      const botId = (Date.now() + 1).toString();
+      let assistantText = "";
+      let created = false;
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let textBuffer = "";
+      let streamDone = false;
+
+      while (!streamDone) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        textBuffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex: number;
+        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
+          let line = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+          if (line.endsWith("\r")) line = line.slice(0, -1);
+          if (line.startsWith(":") || line.trim() === "") continue;
+          if (!line.startsWith("data: ")) continue;
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === "[DONE]") {
+            streamDone = true;
+            break;
+          }
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            if (content) {
+              assistantText += content;
+              if (!created) {
+                created = true;
+                setIsTyping(false);
+                setMessages((prev) => [
+                  ...prev,
+                  { id: botId, text: assistantText, sender: "bot", timestamp: new Date() },
+                ]);
+              } else {
+                setMessages((prev) =>
+                  prev.map((m) => (m.id === botId ? { ...m, text: assistantText } : m)),
+                );
+              }
+            }
+          } catch {
+            textBuffer = line + "\n" + textBuffer;
+            break;
+          }
+        }
+      }
+      setIsTyping(false);
+    } catch (err) {
+      console.error("Chat error:", err);
+      setIsTyping(false);
+      toast({ title: "Erreur", description: "Connexion impossible.", variant: "destructive" });
+    }
   };
 
   const handleStartCall = useCallback(async () => {
